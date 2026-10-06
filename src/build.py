@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "31"  # поднимать при правке css/js
+VERSION = "32"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -156,7 +156,11 @@ def m_stats(lang, m):
     slug, name, sex, cats, look, age, height = m
     c = C[lang]
     li = 0 if lang == "ru" else 1
-    return [(c["st"]["height"], f"{height} {c['cm']}"), (c["st"]["age"], f"{age} {c['years']}".strip()),
+    if lang == "ru":
+        yrs = "год" if age % 10 == 1 and age % 100 != 11 else "года" if 2 <= age % 10 <= 4 and not 12 <= age % 100 <= 14 else "лет"
+    else:
+        yrs = ""
+    return [(c["st"]["height"], f"{height} {c['cm']}"), (c["st"]["age"], f"{age} {yrs}".strip()),
             (c["st"]["look"], look[li]), (c["st"]["hair"], HAIR[slug][li]), (c["st"]["eyes"], EYES[slug][li]),
             (c["st"]["license"], c["lic_v"])]
 
@@ -171,7 +175,7 @@ def tile(lang, cur, m):
     return f"""<article class="tile" data-cats="{' '.join(cats)}" data-slug="{slug}">
   <a class="tile-link" href="{href(lang, cur, 'model/' + slug)}"><span class="tile-img"><img src="{asset(lang, cur, f'img/models/{slug}-portrait.jpg')}" alt="{e(name)}" loading="lazy" width="900" height="1200"></span><span class="tile-name">{e(name.lower())}</span></a>
   <button class="tile-fav" type="button" data-fav="{slug}" aria-label="{e(c['fav_add'])}">{I['heart_o']}{I['heart']}</button>
-  <div class="tile-info" aria-hidden="true">{dl(m_stats(lang, m))}<p class="tile-big">{e(name.lower())}</p></div>
+  <div class="tile-info" aria-hidden="true">{dl(m_stats(lang, m)[:5])}<p class="tile-big">{e(name.lower())}</p></div>
 </article>"""
 
 
