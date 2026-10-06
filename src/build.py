@@ -406,9 +406,8 @@ def page_service(lang, key):
     others = "".join(
         f'<a class="other-svc" href="{href(lang, cur, "services/" + k)}"><span>{e(SERVICES[k][lang]["title"])}</span><b>{e(SERVICES[k][lang]["price"])}</b>{ICON["arrow"]}</a>'
         for k in SERVICE_ORDER if k != key)
+    # Пример ролика на странице «Видео» появится, когда будут студийные ролики (подиум — не наша концепция).
     video = ""
-    if key == "video":
-        video = f'<div class="svc-video"><video autoplay muted loop playsinline poster="{asset(lang, cur, "img/hero-poster.jpg")}"><source src="{asset(lang, cur, "video/hero-desktop.mp4")}" type="video/mp4"></video></div>'
     return f"""{head(lang, cur, s['title'] + ' — FIRST LOOK', s['lead'])}
 {header(lang, cur)}
 <main id="main" class="page">

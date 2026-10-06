@@ -222,11 +222,11 @@ SERVICES = {
     },
     "video": {
         "img": ["kian-ashford-full", "elena-voss-full", "rasmus-voight-full"],
-        "ru": {"title": "Видео для соцсетей", "eyebrow": "Услуга", "lead": "Короткие ролики на 5–10 секунд с нашими моделями: проход по подиуму, движение ткани, крупные планы для карточек товара и сторис.",
+        "ru": {"title": "Видео для соцсетей", "eyebrow": "Услуга", "lead": "Короткие ролики на 5–10 секунд с нашими моделями: поворот в студии, движение ткани, смена эмоций и крупные планы для карточек товара и сторис.",
                "price": "от 9 000 ₽", "per": "за ролик", "plan": "photoshoot",
                "incl": ["Ролики 5–10 секунд в 1080p или 4K", "Вертикальный и горизонтальный формат", "Модель из каталога или ваше эксклюзивное лицо", "Можно добавить к любому тарифу", "Готово за 3 рабочих дня"],
                "how": [("Сценарий", "Выбираем движение, локацию и длительность."), ("Генерация", "Делаем ролик и проверяем, что одежда выглядит как оригинал."), ("Монтаж", "Отдаём файлы под сторис, рилс и карточки товара.")]},
-        "en": {"title": "Social video", "eyebrow": "Service", "lead": "Short 5–10 second clips with our models: runway walks, fabric in motion and close-ups for product pages and stories.",
+        "en": {"title": "Social video", "eyebrow": "Service", "lead": "Short 5–10 second clips with our models: studio turns, fabric in motion, changing expressions and close-ups for product pages and stories.",
                "price": "from $120", "per": "per clip", "plan": "photoshoot",
                "incl": ["5–10 second clips in 1080p or 4K", "Vertical and horizontal formats", "A roster model or your exclusive face", "Can be added to any plan", "Ready in 3 business days"],
                "how": [("Script", "We choose the motion, scene and length."), ("Generation", "We produce the clip and check the garment matches the original."), ("Edit", "Files delivered for stories, reels and product pages.")]},
