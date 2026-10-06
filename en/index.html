@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=13">
+<link rel="stylesheet" href="../assets/css/site.css?v=14">
 </head>
 <body id="top" class="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -37,8 +37,10 @@
 
 <main id="main">
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="../assets/img/hero-poster.jpg" data-hero-video>
-    <source src="../assets/video/hero.mp4" type="video/mp4">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="../assets/img/hero-poster.jpg" data-hero-video
+    data-desktop="../assets/video/hero-desktop.mp4" data-mobile="../assets/video/hero-mobile.mp4"
+    data-poster-desktop="../assets/img/hero-poster.jpg" data-poster-mobile="../assets/img/hero-poster-mobile.jpg">
+    <source src="../assets/video/hero-desktop.mp4" type="video/mp4">
   </video>
   <i class="hero-shade"></i>
   <div class="hero-in">
@@ -349,6 +351,6 @@
 </footer>
 
 <script>window.FL={"lang": "en"};</script>
-<script src="../assets/js/site.js?v=13" defer></script>
+<script src="../assets/js/site.js?v=14" defer></script>
 </body>
 </html>

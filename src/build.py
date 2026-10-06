@@ -9,7 +9,7 @@ from pathlib import Path
 from data import CAT, DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "13"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
+VERSION = "14"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
 e = html.escape
 
 
@@ -316,8 +316,10 @@ def page_home(lang):
 {header(lang, cur, transparent=True)}
 <main id="main">
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="{asset(lang, cur, 'img/hero-poster.jpg')}" data-hero-video>
-    <source src="{asset(lang, cur, 'video/hero.mp4')}" type="video/mp4">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="{asset(lang, cur, 'img/hero-poster.jpg')}" data-hero-video
+    data-desktop="{asset(lang, cur, 'video/hero-desktop.mp4')}" data-mobile="{asset(lang, cur, 'video/hero-mobile.mp4')}"
+    data-poster-desktop="{asset(lang, cur, 'img/hero-poster.jpg')}" data-poster-mobile="{asset(lang, cur, 'img/hero-poster-mobile.jpg')}">
+    <source src="{asset(lang, cur, 'video/hero-desktop.mp4')}" type="video/mp4">
   </video>
   <i class="hero-shade"></i>
   <div class="hero-in">
@@ -408,7 +410,7 @@ def page_service(lang, key):
         for k in SERVICE_ORDER if k != key)
     video = ""
     if key == "video":
-        video = f'<div class="svc-video"><video autoplay muted loop playsinline poster="{asset(lang, cur, "img/hero-poster.jpg")}"><source src="{asset(lang, cur, "video/hero.mp4")}" type="video/mp4"></video></div>'
+        video = f'<div class="svc-video"><video autoplay muted loop playsinline poster="{asset(lang, cur, "img/hero-poster.jpg")}"><source src="{asset(lang, cur, "video/hero-desktop.mp4")}" type="video/mp4"></video></div>'
     return f"""{head(lang, cur, s['title'] + ' — FIRST LOOK', s['lead'])}
 {header(lang, cur)}
 <main id="main" class="page">

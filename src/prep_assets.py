@@ -39,12 +39,26 @@ def main():
         save(f, OUT / f"{slug}-full.jpg")
     vid = ROOT / "assets" / "video"
     vid.mkdir(parents=True, exist_ok=True)
-    src = DL / "hero_bg_loop_final.mp4"
-    subprocess.run([str(FF / "ffmpeg"), "-v", "error", "-y", "-i", str(src), "-an", "-vf", "scale=1600:-2",
-                    "-c:v", "libx264", "-crf", "26", "-preset", "slow", "-pix_fmt", "yuv420p",
-                    "-movflags", "+faststart", str(vid / "hero.mp4")], check=True)
-    subprocess.run([str(FF / "ffmpeg"), "-v", "error", "-y", "-i", str(src), "-frames:v", "1",
-                    "-vf", "scale=1600:-2", "-q:v", "4", str(ROOT / "assets" / "img" / "hero-poster.jpg")], check=True)
+    ff = str(FF / "ffmpeg")
+    enc = ["-an", "-c:v", "libx264", "-crf", "26", "-preset", "slow", "-pix_fmt", "yuv420p", "-movflags", "+faststart"]
+    # Телефон: узкая петля с моделью по центру (Downloads/hero_bg_loop_final.mp4).
+    mob = DL / "hero_bg_loop_final.mp4"
+    subprocess.run([ff, "-v", "error", "-y", "-i", str(mob), "-vf", "scale=1600:-2", *enc, str(vid / "hero-mobile.mp4")], check=True)
+    subprocess.run([ff, "-v", "error", "-y", "-i", str(mob), "-frames:v", "1", "-vf", "scale=1600:-2", "-q:v", "4",
+                    str(ROOT / "assets" / "img" / "hero-poster-mobile.jpg")], check=True)
+    # Десктоп: широкий подиум со зрителями (Downloads/b_A_cinematic_luxury_f.mp4).
+    # С 8,000 с идёт белая заставка Arena AI — берём первые 240 кадров (0–7,967 с)
+    # и склеиваем «вперёд + назад», как мобильную петлю, чтобы стык был незаметен.
+    wide = DL / "b_A_cinematic_luxury_f.mp4"
+    graph = ("[0:v]trim=end_frame=240,setpts=PTS-STARTPTS,scale=1920:-2,split[a][b];"
+             "[b]reverse,trim=start_frame=1,setpts=PTS-STARTPTS[r];[a][r]concat=n=2:v=1[v]")
+    subprocess.run([ff, "-v", "error", "-y", "-i", str(wide), "-filter_complex", graph, "-map", "[v]", *enc,
+                    str(vid / "hero-desktop.mp4")], check=True)
+    subprocess.run([ff, "-v", "error", "-y", "-i", str(wide), "-frames:v", "1", "-vf", "scale=1920:-2", "-q:v", "4",
+                    str(ROOT / "assets" / "img" / "hero-poster.jpg")], check=True)
+    old = vid / "hero.mp4"
+    if old.exists():
+        old.unlink()
     print("ok:", len(SRC), "models")
 
 

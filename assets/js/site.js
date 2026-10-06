@@ -34,6 +34,21 @@
 
   /* видео первого экрана */
   var video = doc.querySelector("[data-hero-video]"), vt = doc.querySelector("[data-video-toggle]");
+  /* широкий ролик со зрителями — на компьютере, узкий с моделью по центру — на телефоне */
+  var phone = window.matchMedia("(max-width: 760px), (orientation: portrait)");
+  function pickVideo() {
+    if (!video) return;
+    var kind = phone.matches ? "mobile" : "desktop", src = video.getAttribute("data-" + kind);
+    if (video.getAttribute("data-current") === kind) return;
+    video.setAttribute("data-current", kind);
+    video.poster = video.getAttribute("data-poster-" + kind);
+    var wasPaused = vt && vt.classList.contains("is-paused");
+    video.src = src;
+    video.load();
+    if (!reduce && !wasPaused) { var pp = video.play(); if (pp && pp.catch) pp.catch(function () {}); }
+  }
+  pickVideo();
+  if (phone.addEventListener) phone.addEventListener("change", pickVideo); else if (phone.addListener) phone.addListener(pickVideo);
   if (video && vt) {
     if (reduce) { video.pause(); vt.classList.add("is-paused"); }
     else {
