@@ -9,7 +9,7 @@ from pathlib import Path
 from data import CAT, DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "15"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
+VERSION = "16"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
 e = html.escape
 
 
