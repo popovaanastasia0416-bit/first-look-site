@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "34"  # поднимать при правке css/js
+VERSION = "35"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -58,7 +58,7 @@ def nav_href(lang, cur, key):
 
 # ── каркас ───────────────────────────────────────────────────────────────
 def models_js(lang, cur):
-    return [{"slug": m[0], "name": m[1].lower(), "sex": m[2], "img": asset(lang, cur, f"img/models/{m[0]}-portrait.jpg"),
+    return [{"slug": m[0], "name": m[1].lower(), "sex": m[2], "img": asset(lang, cur, f"img/models/{m[0]}-look.jpg"),
              "url": href(lang, cur, "model/" + m[0])} for m in MODELS]
 
 
@@ -219,7 +219,7 @@ def tile(lang, cur, m):
     slug, name, cats = m[0], m[1], m[3]
     c = C[lang]
     return f"""<article class="tile" data-cats="{' '.join(cats)}" data-slug="{slug}">
-  <a class="tile-link" href="{href(lang, cur, 'model/' + slug)}"><span class="tile-img"><img src="{asset(lang, cur, f'img/models/{slug}-portrait.jpg')}" alt="{e(name)}" loading="lazy" width="900" height="1200"></span><span class="tile-name">{e(name.lower())}</span></a>
+  <a class="tile-link" href="{href(lang, cur, 'model/' + slug)}"><span class="tile-img"><img src="{asset(lang, cur, f'img/models/{slug}-look.jpg')}" alt="{e(name)}" loading="lazy" width="900" height="1200"></span><span class="tile-name">{e(name.lower())}</span></a>
   <button class="tile-fav" type="button" data-fav="{slug}" aria-label="{e(c['fav_add'])}">{I['heart_o']}{I['heart']}</button>
   <div class="tile-info" aria-hidden="true">{dl(m_stats(lang, m)[:5])}<p class="tile-big">{e(name.lower())}</p></div>
 </article>"""
@@ -281,8 +281,9 @@ def p_model(lang, i):
     </div>
   </aside>
   <div class="mp-gallery">
-    <figure><img src="{img('portrait')}" alt="{e(name)}" width="900" height="1200"></figure>
+    <figure><img src="{img('look')}" alt="{e(name)}" width="900" height="1200"></figure>
     <figure><img src="{img('full')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
+    <figure><img src="{img('portrait')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
   </div>
 </main>
 """
