@@ -9,7 +9,7 @@ from pathlib import Path
 from data import CAT, DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "14"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
+VERSION = "15"  # поднимать при правке css/js, чтобы браузер не брал старое из кэша
 e = html.escape
 
 
@@ -128,8 +128,10 @@ def header(lang, cur, transparent=False, has_req=True):
 
 
 def sec_head(eyebrow, title, aside=None, tag="h2"):
+    """Мелкие подписи над заголовками она убрала в макете — eyebrow передаём None."""
     a = f'<p class="sec-aside">{e(aside)}</p>' if aside else ""
-    return f'<div class="sec-head"><div><p class="eyebrow">{e(eyebrow)}</p><{tag} class="h2">{e(title)}</{tag}></div>{a}</div>'
+    eb = f'<p class="eyebrow">{e(eyebrow)}</p>' if eyebrow else ""
+    return f'<div class="sec-head"><div>{eb}<{tag} class="h2">{e(title)}</{tag}></div>{a}</div>'
 
 
 def request_block(lang, cur):
@@ -181,10 +183,6 @@ def footer(lang, cur):
     </div>
   </div>
   <div class="wordmark" aria-hidden="true"><span>FIRST LOOK</span></div>
-  <div class="wrap foot-bar">
-    <p><span>{e(t['copy'])}</span><i></i><span>{e(t['ai_note'])}</span><i></i><span>{e(t['legal_line'])}</span></p>
-    <a class="btn btn-outline btn-sm" href="#top" data-top>{e(t['top'])}{ICON['up']}</a>
-  </div>
 </footer>
 """
 
@@ -233,7 +231,7 @@ def roster(lang, cur, heading_tag="h2", show_all_link=True):
     return f"""<div class="filter-bar"><div class="wrap">{filters(lang)}</div></div>
 <section class="roster" id="models">
   <div class="wrap">
-    <div class="roster-head"><{heading_tag} class="h2">{e(t['roster_h'])}</{heading_tag}><p class="count"><span data-count>{len(MODELS)}</span> / {len(MODELS)} {e(t['roster_count'])}</p></div>
+    <div class="roster-head"><{heading_tag} class="h2">{e(t['roster_h'])}</{heading_tag}></div>
     <div class="grid" data-grid>{cards}</div>
     <p class="empty" data-empty hidden>{e(t['empty'])}</p>
     {link}
@@ -272,7 +270,7 @@ def process(lang, cur):
         for i, (h, p) in enumerate(t["steps"]))
     return f"""<section class="process" id="process">
   <div class="wrap">
-    {sec_head(t['process_eyebrow'], t['process_h'], t['process_aside'])}
+    {sec_head(None, t['process_h'], t['process_aside'])}
     <ol class="path" data-path><i class="track"></i><i class="track-fill"></i>{steps}</ol>
   </div>
 </section>
@@ -288,13 +286,13 @@ def pricing(lang, cur):
         plans += f"""<div class="plan{' is-hl' if hl else ''}"><div class="plan-top"><p class="plan-name">{e(name)}</p>{badge}</div>
 <p class="price"><b>{e(price)}</b><span>{e(per)}</span></p><p class="muted">{e(desc)}</p><ul class="checks">{fl}</ul>
 <a class="btn {'btn-white' if hl else 'btn-outline'} btn-block" href="#request" data-service="{key}">{e(cta)}</a></div>"""
-    return f"""<section class="pricing" id="pricing"><div class="wrap">{sec_head(t['pricing_eyebrow'], t['pricing_h'], t['pricing_aside'])}<div class="plans">{plans}</div></div></section>"""
+    return f"""<section class="pricing" id="pricing"><div class="wrap">{sec_head(None, t['pricing_h'])}<div class="plans">{plans}</div></div></section>"""
 
 
 def faq(lang):
     t = T[lang]
     items = "".join(f'<details class="faq-item"><summary><span>{e(q)}</span>{ICON["plus"]}</summary><p>{e(a)}</p></details>' for q, a in t["faq"])
-    return f"""<section class="faq" id="faq"><div class="wrap">{sec_head(t['faq_eyebrow'], t['faq_h'])}<div class="faq-list">{items}</div></div></section>"""
+    return f"""<section class="faq" id="faq"><div class="wrap">{sec_head(None, t['faq_h'])}<div class="faq-list">{items}</div></div></section>"""
 
 
 # ── страницы ─────────────────────────────────────────────────────────────
@@ -331,8 +329,8 @@ def page_home(lang):
   <button class="video-toggle" type="button" aria-label="{e(t['sound_on'])}" data-video-toggle>{ICON['pause']}{ICON['play']}</button>
 </section>
 <section class="intro" id="intro"><div class="wrap intro-in"><h2 class="h2 h-intro">{e(t['intro_h'])}</h2><p class="muted lead">{e(t['intro_p'])}</p></div></section>
-<section class="services" id="services"><div class="wrap">{sec_head(t['services_eyebrow'], t['services_h'], t['services_aside'])}<div class="svc-grid">{''.join(svc)}</div></div></section>
-{roster(lang, cur)}
+<section class="services" id="services"><div class="wrap">{sec_head(None, t['services_h'], t['services_aside'])}<div class="svc-grid">{''.join(svc)}</div></div></section>
+{roster(lang, cur, show_all_link=False)}
 {process(lang, cur)}
 {pricing(lang, cur)}
 {faq(lang)}
@@ -402,7 +400,7 @@ def page_service(lang, key):
     incl = "".join(f"<li>{e(x)}</li>" for x in s["incl"])
     if s["how"]:
         how = "".join(f'<li><span class="num">0{i + 1}</span><h3>{e(h)}</h3><p class="muted">{e(p)}</p></li>' for i, (h, p) in enumerate(s["how"]))
-        how_block = f'<section class="how"><div class="wrap">{sec_head(s["eyebrow"], t["how"])}<ol class="how-list">{how}</ol></div></section>'
+        how_block = f'<section class="how"><div class="wrap">{sec_head(None, t["how"])}<ol class="how-list">{how}</ol></div></section>'
     else:
         how_block = process(lang, cur)
     others = "".join(

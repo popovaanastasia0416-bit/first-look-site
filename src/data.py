@@ -59,7 +59,7 @@ T = {
         ],
         "scene": {"front": "Перед", "back": "Спинка", "upload": "Загрузка фото", "chips": ["Студия", "Улица", "Интерьер"],
                   "picked": "Выбрано: Saskia · Студия", "st_up": "Ожидание", "st_act": "Генерация · 72%", "st_done": "Готово · 100%", "files": "20 файлов · 4K"},
-        "pricing_eyebrow": "Цены", "pricing_h": "Простые и понятные цены",
+        "pricing_eyebrow": "Цены", "pricing_h": "Тарифы",
         "pricing_aside": "Цены указаны для одного бренда, без НДС. Нужен большой объём для маркетплейса? Соберём индивидуальный тариф.",
         "popular": "Популярное",
         "plans": [
@@ -70,7 +70,7 @@ T = {
             ("exclusive", "Эксклюзивное лицо", "250 000 ₽", "разово", "Модель, созданная только для вашего бренда.",
              ["Уникальное лицо по вашему брифу", "Не появляется в общем каталоге", "Полный выкуп прав", "Печать, наружная реклама и ТВ", "Приоритет в работе"], "Обсудить проект", False),
         ],
-        "faq_eyebrow": "Вопросы", "faq_h": "Что спрашивают бренды",
+        "faq_eyebrow": "Вопросы", "faq_h": "Частые вопросы",
         "faq": [
             ("Это настоящие люди?", "Нет. Все модели полностью созданы ИИ. Мы не используем лицо, тело или внешность реальных людей — поэтому не нужны модельные релизы и поездки, и не бывает споров о правах."),
             ("Лицо будет одинаковым во всех съёмках?", "Да. У каждой модели закреплённая внешность, так что одно лицо проходит через весь каталог, соцсети и рекламу."),
@@ -137,7 +137,7 @@ T = {
         ],
         "scene": {"front": "Front", "back": "Back", "upload": "Photo upload", "chips": ["Studio", "Street", "Interior"],
                   "picked": "Selected: Saskia · Studio", "st_up": "Queued", "st_act": "Generating · 72%", "st_done": "Done · 100%", "files": "20 files · 4K"},
-        "pricing_eyebrow": "Pricing", "pricing_h": "Simple, transparent rates",
+        "pricing_eyebrow": "Pricing", "pricing_h": "Pricing",
         "pricing_aside": "Prices are per brand, excluding VAT. Need volume for a marketplace catalog? We'll put together a custom plan.",
         "popular": "Most popular",
         "plans": [
@@ -148,7 +148,7 @@ T = {
             ("exclusive", "Exclusive face", "$2,900", "one-time", "A model created for your brand only.",
              ["Custom face designed to your brief", "Removed from the public roster", "Full buyout of rights", "Print, OOH & TV usage", "Priority production"], "Discuss a project", False),
         ],
-        "faq_eyebrow": "FAQ", "faq_h": "Questions brands ask us",
+        "faq_eyebrow": "FAQ", "faq_h": "Frequently asked questions",
         "faq": [
             ("Are the models real people?", "No. Every model is fully AI-generated. No real person's face, body or likeness is used — so there are no model releases, travel or usage disputes."),
             ("Will the face stay the same across shoots?", "Yes. Each model has a fixed identity, so one face carries through your catalog, social content and campaigns."),
