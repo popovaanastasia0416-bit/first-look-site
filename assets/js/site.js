@@ -105,12 +105,15 @@
     if (q) { var b = $('[data-filter="' + q + '"]', bar); if (b) b.click(); }
   });
 
-  /* ── панель при наведении: справа от фото, у правого края — слева ── */
+  /* ── панель при наведении, как у Models 1: в первом ряду — под карточкой,
+        дальше — справа от фото, в последней колонке — слева ── */
   function flipTiles() {
     $$(".grid").forEach(function (grid) {
-      var gr = grid.getBoundingClientRect();
-      $$(".tile:not(.is-hidden)", grid).forEach(function (t) {
+      var gr = grid.getBoundingClientRect(), tiles = $$(".tile:not(.is-hidden)", grid);
+      var top0 = tiles.length ? tiles[0].getBoundingClientRect().top : 0;
+      tiles.forEach(function (t) {
         var r = t.getBoundingClientRect();
+        t.classList.toggle("below", Math.abs(r.top - top0) < 4);
         t.classList.toggle("flip", r.right + r.width + 120 > gr.right + 8);
       });
     });

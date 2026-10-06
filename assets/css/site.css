@@ -102,11 +102,17 @@ body.ov-open{overflow:hidden}
 .tile-info dl div{display:contents}
 .tile-info dt,.tile-info dd{opacity:0;transform:translateX(-10px);transition:opacity .4s var(--ease),transform .5s var(--ease)}
 .tile.flip .tile-info dt,.tile.flip .tile-info dd{transform:translateX(10px)}
-.tile-info dt{min-width:50px;font-size:14px;line-height:20px;color:rgba(255,255,255,.6);text-transform:lowercase}
+.tile-info dt{min-width:50px;align-self:center;font-size:14px;line-height:20px;color:rgba(255,255,255,.6);text-transform:lowercase}
 .tile-info dd{margin:0;align-self:center;font-size:12px;line-height:16px;color:#fff;text-transform:uppercase}
 .tile-info ul{margin:0;padding:0;list-style:none;display:grid;row-gap:8px}
 .tile-info li{font-size:14px;line-height:20px;color:rgba(255,255,255,.75);opacity:0;transform:translateX(-10px);transition:opacity .4s var(--ease),transform .5s var(--ease)}
 .tile-info li::before{content:"— ";color:rgba(255,255,255,.4)}
+/* первый ряд: параметры под карточкой, на месте имени, на ширину фото */
+.tile.below .tile-info,.tile.below.flip .tile-info{top:calc(100% - 8px);left:0;right:auto;width:100%;min-width:0;max-width:none;height:auto;justify-content:flex-start}
+.tile.below .tile-info dt,.tile.below .tile-info dd,.tile.below .tile-info li{transform:translateY(-6px)}
+.tile.below .tile-info dl{column-gap:12px}
+.tile.below .tile-info dd{hyphens:manual;overflow-wrap:anywhere}
+.tile.below .tile-big{margin-top:24px}
 .tile-big{margin:16px 0 0;font-size:36px;font-weight:400;line-height:40px;color:#fff;text-transform:lowercase;opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease) .2s,transform .55s var(--ease) .2s}
 @media (hover:hover) and (min-width:901px){
   /* остальные карточки целиком (фото и имя) — blur 35px и прозрачность .4, края не обрезаются, а растекаются */

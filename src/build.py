@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "33"  # поднимать при правке css/js
+VERSION = "34"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -165,8 +165,54 @@ def m_stats(lang, m):
             (c["st"]["license"], c["lic_v"])]
 
 
+_VOW = set("аеёиоуыэюяaeiouy")
+_KEEP = set("йьъ")
+_EN_HY = {"scandinavian": "scan-di-na-vian", "mediterranean": "med-i-ter-ra-nean", "californian": "cal-i-for-nian",
+          "african": "af-ri-can", "american": "amer-i-can", "southern": "south-ern", "european": "eu-ro-pean"}
+
+
+def _hy_word(w):
+    """Мягкие переносы по слогам для узкой панели при наведении (браузеры на Windows сами по-русски не переносят)."""
+    low = w.lower()
+    if low in _EN_HY:
+        parts, i = [], 0
+        for chunk in _EN_HY[low].split("-"):
+            parts.append(w[i:i + len(chunk)]); i += len(chunk)
+        return "­".join(parts)
+    if len(w) < 7 or not any(ch in _VOW for ch in low):
+        return w
+    # между соседними гласными: одна согласная уходит на новую строку (ла-ми), из группы — первая остаётся (нав-ский),
+    # й и ь/ъ всегда остаются на строке (пей-ский, италь-ян)
+    n, vow = len(w), [i for i, ch in enumerate(low) if ch in _VOW]
+    cuts = []
+    for p, q in zip(vow, vow[1:]):
+        cons = low[p + 1:q]
+        if not cons or "-" in cons:
+            continue
+        if len(cons) == 1:
+            c = p + 1
+        else:
+            c = p + 2
+            while c < q and low[c] in _KEEP:
+                c += 1
+            if c >= q:
+                continue
+        if c - (cuts[-1] if cuts else 0) >= 2 and n - c >= 2:
+            cuts.append(c)
+    out, prev = [], 0
+    for c in cuts:
+        out.append(w[prev:c]); prev = c
+    out.append(w[prev:])
+    return "­".join(out)
+
+
+def hy(text):
+    import re
+    return re.sub(r"[A-Za-zА-Яа-яЁё]+", lambda m: _hy_word(m.group(0)), text)
+
+
 def dl(rows):
-    return "<dl>" + "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in rows) + "</dl>"
+    return "<dl>" + "".join(f"<div><dt>{e(k)}</dt><dd>{e(hy(v))}</dd></div>" for k, v in rows) + "</dl>"
 
 
 def tile(lang, cur, m):
