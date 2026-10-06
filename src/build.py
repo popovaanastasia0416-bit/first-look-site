@@ -153,7 +153,8 @@ def page(lang, cur, title, desc, body, cls="", model_back=None):
 
 # ── карточки и панели ────────────────────────────────────────────────────
 # у этих моделей первым остаётся прежний студийный портрет, новый кадр идёт в конец галереи
-KEEP_FIRST_PORTRAIT = {"saskia-lund", "priya-anand", "talia-renard", "noor-delacroix"}
+KEEP_FIRST_PORTRAIT = {"saskia-lund", "priya-anand", "talia-renard", "noor-delacroix",
+                       "emil-vantongeren", "noah-kessler", "felix-aurelio"}
 
 
 def cover(slug):
