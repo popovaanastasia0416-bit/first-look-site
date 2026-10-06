@@ -1,3 +1,4 @@
+@property --fr{syntax:'<percentage>';inherits:false;initial-value:400%}
 /* FIRST LOOK — многостраничный сайт по структуре models1.co.uk. Чёрный фон, Jost (замена Limerick), строчные заголовки. */
 :root{
   --bg:#000; --fg:#fff; --muted:#a7a7a7; --dim:#6f6f6f; --line:rgba(255,255,255,.18);
@@ -110,7 +111,10 @@ body.ov-open{overflow:hidden}
 @media (hover:hover) and (min-width:901px){
   /* остальные карточки целиком (фото и имя) — blur 35px и прозрачность .4, края не обрезаются, а растекаются */
   .tile{transition:filter .5s var(--ease),opacity .5s var(--ease)}
-  .grid:has(.tile:hover) .tile:not(:hover){filter:blur(35px);opacity:.4}
+  .grid:has(.tile:hover) .tile:not(:hover){filter:blur(40px);opacity:.55}
+  /* растушёвка: фото сначала превращается в мягкое пятно без углов, потом размывается — прямоугольников не видно */
+  .tile-img{-webkit-mask-image:radial-gradient(ellipse var(--fr) var(--fr) at 50% 45%,#000 45%,transparent 100%);mask-image:radial-gradient(ellipse var(--fr) var(--fr) at 50% 45%,#000 45%,transparent 100%);transition:--fr .5s var(--ease)}
+  .grid:has(.tile:hover) .tile:not(:hover) .tile-img{--fr:62%}
   .tile:hover{z-index:5}
   .tile:hover .tile-name{opacity:0}
   .tile:hover .tile-info{opacity:1;visibility:visible}
