@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "36"  # поднимать при правке css/js
+VERSION = "38"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -278,6 +278,9 @@ def p_model(lang, i):
     slug, name, sex = m[0], m[1], m[2]
     cur = "model/" + slug
     img = lambda k: asset(lang, cur, f"img/models/{slug}-{k}.jpg")
+    # обложка выдуманного журнала — вторым кадром, если она есть
+    mag = (f'\n    <figure><img src="{img("cover")}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>'
+           if (ROOT / "assets" / "img" / "models" / f"{slug}-cover.jpg").exists() else "")
     q = name.replace(" ", "+")
     body = f"""<main id="main" class="mp">
   <aside class="mp-info">
@@ -290,7 +293,7 @@ def p_model(lang, i):
     </div>
   </aside>
   <div class="mp-gallery">
-    <figure><img src="{img(cover(slug))}" alt="{e(name)}" width="900" height="1200"></figure>
+    <figure><img src="{img(cover(slug))}" alt="{e(name)}" width="900" height="1200"></figure>{mag}
     <figure><img src="{img('full')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
     <figure><img src="{img('look' if cover(slug) == 'portrait' else 'portrait')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
   </div>

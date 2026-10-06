@@ -33,7 +33,9 @@ body.ov-open{overflow:hidden}
 .lang i{font-style:normal;color:var(--dim)}
 .lang .on{color:#fff}
 .hdr-model{background:none;pointer-events:none}
-.hdr-model .hdr-ico{pointer-events:auto;gap:22px}
+.hdr-model .hdr-ico{pointer-events:auto;gap:22px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.55))}
+.hdr-model .lang a,.hdr-model .lang i{color:rgba(255,255,255,.7)}
+.hdr-model .lang .on{color:#fff}
 .hdr-model .ico{width:30px;height:30px}
 .hdr-model .ico svg{width:28px;height:28px}
 
