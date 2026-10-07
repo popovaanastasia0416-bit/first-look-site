@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "39"  # поднимать при правке css/js
+VERSION = "41"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -77,7 +77,7 @@ def head(lang, cur, title, desc, cls=""):
 <link rel="icon" href="{asset(lang, cur, 'img/favicon.svg')}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{asset(lang, cur, 'css/site.css')}?v={VERSION}">
 </head>
 <body class="{cls}">
@@ -363,9 +363,11 @@ def p_about(lang):
     faq = "".join(f'<details><summary>{e(q.lower())}</summary><p>{e(a)}</p></details>' for q, a in t["faq"])
     body = f"""<main id="main" class="about">
   <figure class="about-img"><img src="{asset(lang, cur, 'img/models/saskia-lund-full.jpg')}" alt="" width="900" height="1200"></figure>
-  <div class="about-body">
-    <h1 class="big-title">{e(c['about_h'])}</h1>
+  <div class="about-head">
+    <h1 class="about-title">{e(c['about_h'])}</h1>
     <nav class="about-tabs" data-tabs>{tabs}</nav>
+  </div>
+  <div class="about-body">
     <section class="about-pane on" id="agency" data-pane="agency">{agency}</section>
     <section class="about-pane" id="process" data-pane="process"><h2>{e(c['process_h'])}</h2><ol class="steps">{steps}</ol><h2>{e(c['prices_h'])}</h2><div class="plans">{plans}</div></section>
     <section class="about-pane" id="faq" data-pane="faq">{faq}</section>
@@ -387,7 +389,7 @@ def form(lang, cur):
   <label class="field"><input name="name" placeholder="{e(c['f_name'])}" autocomplete="name"><span class="err">{e(c['f_err_name'])}</span></label>
   <label class="field"><input name="email" type="email" placeholder="{e(c['f_email'])}" autocomplete="email"><span class="err">{e(c['f_err_email'])}</span></label>
   <label class="field"><input name="brand" placeholder="{e(c['f_brand'])}" autocomplete="organization"></label>
-  <label class="field"><textarea name="task" rows="3" placeholder="{e(c['f_task'])}"></textarea></label>
+  <label class="field"><textarea name="task" rows="1" placeholder="{e(c['f_task'])}"></textarea></label>
   <button class="btn" type="submit">{e(c['f_send'])}</button>
   <p class="note">{e(c['f_note'])}<a href="{href(lang, cur, 'docs/privacy')}">{e(c['f_note_link'])}</a>.</p>
 </form>"""

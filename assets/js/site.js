@@ -194,6 +194,11 @@
       try { sessionStorage.setItem("fl-name", n.value.trim()); } catch (err) {}
       location.href = form.getAttribute("action");
     });
+    // «коротко о задаче» — одна строка, растёт по мере ввода
+    $$("textarea", form).forEach(function (t) {
+      var fit = function () { t.style.height = "auto"; t.style.height = t.scrollHeight + 1 + "px"; };
+      t.addEventListener("input", fit); fit();
+    });
     $$("input", form).forEach(function (i) { i.addEventListener("input", function () { var f = i.closest(".field"); if (f) f.classList.remove("is-err"); }); });
   }
   var th = $("[data-thanks-text]");
