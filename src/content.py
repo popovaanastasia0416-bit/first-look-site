@@ -24,7 +24,7 @@ EYES = {
 C = {
     "ru": {
         "brand": "first look",
-        "nav": [("women", "женщины"), ("men", "мужчины"), ("services", "услуги"), ("video", "видео"),
+        "nav": [("women", "женщины"), ("men", "мужчины"), ("services", "услуги"),
                 ("about", "агентство"), ("apply", "заявка"), ("contact", "контакты")],
         "home": "главная",
         "board": {"women": "женщины", "men": "мужчины"},
@@ -84,7 +84,7 @@ C = {
     },
     "en": {
         "brand": "first look",
-        "nav": [("women", "women"), ("men", "men"), ("services", "services"), ("video", "video"),
+        "nav": [("women", "women"), ("men", "men"), ("services", "services"),
                 ("about", "about"), ("apply", "book"), ("contact", "contact")],
         "home": "home",
         "board": {"women": "women", "men": "men"},
