@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "44"  # поднимать при правке css/js
+VERSION = "45"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -286,10 +286,16 @@ def p_model(lang, i):
     slug, name, sex = m[0], m[1], m[2]
     cur = "model/" + slug
     img = lambda k: asset(lang, cur, f"img/models/{slug}-{k}.jpg")
-    # обложка выдуманного журнала — вторым кадром, если она есть
-    mag = (f'\n    <figure><img src="{img("cover")}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>'
-           if (ROOT / "assets" / "img" / "models" / f"{slug}-cover.jpg").exists() else "")
     q = name.replace(" ", "+")
+    # кадры анкеты: основной, обложка (вторая или первая), полный рост, второй портрет — только те, что есть
+    has = lambda k: (ROOT / "assets" / "img" / "models" / f"{slug}-{k}.jpg").exists()
+    order = [cover(slug), "cover", "full", "look" if cover(slug) == "portrait" else "portrait"]
+    if slug in MAG_FIRST:
+        order = ["cover", cover(slug), "full", "look" if cover(slug) == "portrait" else "portrait"]
+    keys = [k for i, k in enumerate(order) if has(k) and k not in order[:i]]
+    lazy = ' loading="lazy"'
+    gallery = "".join(f'\n    <figure><img src="{img(k)}" alt="{e(name)}" width="900" height="1200"{lazy if n else ""}></figure>'
+                      for n, k in enumerate(keys))
     body = f"""<main id="main" class="mp">
   <aside class="mp-info">
     <h1 class="mp-name">{e(name.lower())}</h1>
@@ -300,10 +306,7 @@ def p_model(lang, i):
       <a href="{href(lang, cur, 'apply')}?service=photoshoot&amp;model={q}">{I['down']}<span>{e(c['shoot'])}</span></a>
     </div>
   </aside>
-  <div class="mp-gallery">{mag if slug in MAG_FIRST else ""}
-    <figure><img src="{img(cover(slug))}" alt="{e(name)}" width="900" height="1200"></figure>{"" if slug in MAG_FIRST else mag}
-    <figure><img src="{img('full')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
-    <figure><img src="{img('look' if cover(slug) == 'portrait' else 'portrait')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
+  <div class="mp-gallery">{gallery}
   </div>
 </main>
 """
