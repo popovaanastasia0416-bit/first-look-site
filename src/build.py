@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "42"  # поднимать при правке css/js
+VERSION = "43"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -157,6 +157,10 @@ KEEP_FIRST_PORTRAIT = {"saskia-lund", "priya-anand", "talia-renard", "noor-delac
                        "emil-vantongeren", "noah-kessler", "felix-aurelio"}
 
 
+# у этих моделей в анкете первой идёт обложка журнала
+MAG_FIRST = {"noor-delacroix"}
+
+
 def cover(slug):
     return "portrait" if slug in KEEP_FIRST_PORTRAIT else "look"
 
@@ -291,8 +295,8 @@ def p_model(lang, i):
       <a href="{href(lang, cur, 'apply')}?service=photoshoot&amp;model={q}">{I['down']}<span>{e(c['shoot'])}</span></a>
     </div>
   </aside>
-  <div class="mp-gallery">
-    <figure><img src="{img(cover(slug))}" alt="{e(name)}" width="900" height="1200"></figure>{mag}
+  <div class="mp-gallery">{mag if slug in MAG_FIRST else ""}
+    <figure><img src="{img(cover(slug))}" alt="{e(name)}" width="900" height="1200"></figure>{"" if slug in MAG_FIRST else mag}
     <figure><img src="{img('full')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
     <figure><img src="{img('look' if cover(slug) == 'portrait' else 'portrait')}" alt="{e(name)}" width="900" height="1200" loading="lazy"></figure>
   </div>
