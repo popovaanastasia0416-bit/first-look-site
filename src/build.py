@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "38"  # поднимать при правке css/js
+VERSION = "39"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -132,7 +132,7 @@ def footer(lang, cur):
     return f"""<footer class="ftr">
   <p class="ftr-addr">{addr}</p>
   <div class="ftr-legal"><p>{docs} | {faq}</p><p>{e(c['ai_note'])} | {e(c['legal'])}</p></div>
-  <div class="ftr-soc"><a href="#" aria-label="Instagram" aria-disabled="true">{I['ig']}</a><a href="https://t.me/{c['tg'][1:]}" aria-label="Telegram">{I['tg']}</a><a href="#" aria-label="TikTok" aria-disabled="true">{I['tt']}</a></div>
+  <div class="ftr-soc"><a href="https://t.me/{c['tg'][1:]}" aria-label="Telegram">{I['tg']}</a><a href="#" aria-label="TikTok" aria-disabled="true">{I['tt']}</a></div>
 </footer>
 """
 
@@ -258,7 +258,6 @@ def p_home(lang):
   <i class="home-shade"></i>
   <div class="home-top">{lang_switch(lang, cur)}<button class="ico" type="button" data-open="search" aria-label="{e(c['search'])}">{I['search']}</button></div>
   <div class="home-center"><h1 class="home-logo">{e(c['brand'])}</h1><nav class="home-nav">{links}</nav></div>
-  <a class="home-ig ico" href="#" aria-label="Instagram" aria-disabled="true">{I['ig']}</a>
 </main>
 """
     title = "FIRST LOOK — " + ("агентство ИИ-моделей" if lang == "ru" else "AI model agency")

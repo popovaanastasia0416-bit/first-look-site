@@ -69,8 +69,6 @@ body.ov-open{overflow:hidden}
 .home-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:#fff;transition:right .3s var(--ease)}
 .home-nav a:hover::after{right:0}
 .home-top{position:absolute;top:27px;right:36px;display:flex;align-items:center;gap:20px}
-.home-ig{position:absolute;left:50%;bottom:76px;transform:translateX(-50%)}
-.home-ig svg{width:26px;height:26px}
 
 /* ── доска моделей ─────────────────── */
 .board{display:grid;grid-template-columns:var(--side) 1fr;padding:var(--hdr) var(--padr) 120px 0;min-height:100vh}
