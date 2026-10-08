@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "46"  # поднимать при правке css/js
+VERSION = "50"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -374,7 +374,7 @@ def p_about(lang):
                     for _, n, pr, per, d, *_ in t["plans"])
     faq = "".join(f'<details><summary>{e(q.lower())}</summary><p>{e(a)}</p></details>' for q, a in t["faq"])
     body = f"""<main id="main" class="about">
-  <figure class="about-img"><img src="{asset(lang, cur, 'img/models/saskia-lund-full.jpg')}" alt="" width="900" height="1200"></figure>
+  <figure class="about-img"><img src="{asset(lang, cur, 'img/models/saskia-lund-look.jpg')}" alt="" width="900" height="1200"></figure>
   <div class="about-head">
     <h1 class="about-title">{e(c['about_h'])}</h1>
     <nav class="about-tabs" data-tabs>{tabs}</nav>
@@ -402,6 +402,7 @@ def form(lang, cur):
   <label class="field"><input name="email" type="email" placeholder="{e(c['f_email'])}" autocomplete="email"><span class="err">{e(c['f_err_email'])}</span></label>
   <label class="field"><input name="brand" placeholder="{e(c['f_brand'])}" autocomplete="organization"></label>
   <label class="field"><textarea name="task" rows="1" placeholder="{e(c['f_task'])}"></textarea></label>
+  <label class="field field-file"><input type="file" name="files" accept="image/*" multiple data-files data-files-n="{e(c['f_files_n'])}"><span class="file-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.5 12.6 19.4a5 5 0 0 1-7.1-7.1l8.2-8.2a3.3 3.3 0 0 1 4.7 4.7l-8.2 8.2a1.7 1.7 0 0 1-2.4-2.4l7.6-7.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span data-files-label>{e(c['f_files'])}</span></span><span class="file-thumbs" data-file-thumbs></span></label>
   <button class="btn" type="submit">{e(c['f_send'])}</button>
   <p class="note">{e(c['f_note'])}<a href="{href(lang, cur, 'docs/privacy')}">{e(c['f_note_link'])}</a>.</p>
 </form>"""
@@ -428,7 +429,7 @@ def p_contact(lang):
     c, cur = C[lang], "contact"
     cols = "".join(f'<div><p>{e(k)}</p><a href="mailto:{v}">{e(v)}</a></div>' for k, v in c["contact_cols"])
     body = f"""<main id="main" class="contact">
-  <section class="contact-hero"><img src="{asset(lang, cur, 'img/contact.jpg')}" alt="" width="1920" height="1080"><h1 class="big-title">{e(c['contact_h'])}</h1></section>
+  <section class="contact-hero"><iframe src="https://yandex.ru/map-widget/v1/?ll=37.6110%2C55.7610&amp;z=15&amp;pt=37.6110%2C55.7610%2Cpm2blm&amp;lang={'ru_RU' if lang == 'ru' else 'en_US'}" title="{e(c['contact_h'])}" loading="lazy" allowfullscreen></iframe><h1 class="big-title">{e(c['contact_h'])}</h1></section>
   <p class="contact-addr">{"<br>".join(e(a) for a in c['address'])}<br><a href="https://t.me/{c['tg'][1:]}">telegram {e(c['tg'])}</a></p>
   <div class="contact-cols">{cols}</div>
 </main>

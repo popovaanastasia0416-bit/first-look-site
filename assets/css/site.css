@@ -172,16 +172,15 @@ body.ov-open{overflow:hidden}
 /* ── агентство ─────────────────────── */
 /* «агентство» по замерам Models 1 (1366×768): фото — левая половина на высоту экрана, заголовок 120px по центру на стыке,
    вкладки под ним, текст — колонка справа с x≈62%, шириной ≈340px, начинается вровень с заголовком */
+.big-title{font-size:clamp(56px,6.6vw,96px);font-weight:500;line-height:.95;letter-spacing:-.035em;text-transform:lowercase}
 .about{position:relative;min-height:100vh}
 .about-img{position:absolute;left:0;top:0;width:50%;height:100vh;margin:0;overflow:hidden}
-.about-img img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;filter:grayscale(1) contrast(1.05)}
-.about-head{position:absolute;left:50%;top:37vh;transform:translateX(-50%);text-align:center;z-index:2;pointer-events:none}
-.about-title{font-size:clamp(72px,8.8vw,132px);font-weight:300;line-height:.9;letter-spacing:-.03em;text-transform:lowercase;white-space:nowrap}
-.about-head .about-tabs{pointer-events:auto;justify-content:center;margin:26px 0 0}
-.about-body{margin-left:62.4%;width:min(360px,30%);padding:47vh 0 140px}
-/* «агентство» длиннее «about»: текст начинается под заголовком и вкладками, а не вровень с ними */
-html[lang="ru"] .about-body{padding-top:calc(37vh + 200px)}
-.is-about .hdr{background:none}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:grayscale(1) contrast(1.05)}
+/* весь текст — на чёрной половине: заголовок, вкладки и текст одной колонкой правее фото, выше по экрану */
+.about-head{position:relative;margin-left:calc(50% + 6vw);padding-top:150px;text-align:left;z-index:2}
+.about-title{font-size:clamp(64px,6.6vw,112px);font-weight:300;line-height:.9;letter-spacing:-.03em;text-transform:lowercase;white-space:nowrap}
+.about-head .about-tabs{justify-content:flex-start;margin:26px 0 0}
+.about-body{margin-left:calc(50% + 6vw);width:min(440px,calc(50% - 6vw - 64px));padding:44px 0 140px}
 .about-tabs{display:flex;gap:24px;font-size:20px}
 .about-tabs a{color:#fff;opacity:.85;transition:opacity .2s}
 .about-tabs a.on,.about-tabs a:hover{opacity:1}
@@ -249,8 +248,11 @@ details p{padding:0 0 18px}
 
 /* ── контакты ──────────────────────── */
 .contact{padding-top:var(--hdr)}
-.contact-hero{position:relative;height:46vh;min-height:300px;overflow:hidden}
-.contact-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 16%}
+.is-contact .hdr{background:#000}
+.contact-hero{position:relative;height:43vh;min-height:300px;overflow:hidden;background:#1b1b1b}
+/* карта как у Models 1: тёмная, на всю ширину, слово «контакты» снизу поверх неё */
+.contact-hero iframe{display:block;width:100%;height:calc(100% + 60px);margin-top:-60px;border:0;filter:invert(.92) hue-rotate(180deg) grayscale(1) contrast(.95) brightness(.9)}
+.contact-hero .big-title{pointer-events:none}
 .contact-hero .big-title{position:absolute;left:50%;bottom:-0.12em;transform:translateX(-50%);white-space:nowrap}
 .contact-addr{margin:40px auto 0;text-align:center;font-size:16px;line-height:1.6}
 .contact-addr a{text-decoration:underline;text-underline-offset:4px}
@@ -313,10 +315,11 @@ details p{padding:0 0 18px}
   .mp-gallery{padding:0 20px 60px}
   .hdr-model .hdr-ico{right:16px}
   .about-img{position:relative;width:auto;height:72vh;margin:0 -20px}
-  .about-head{position:relative;left:auto;top:auto;transform:none;margin-top:-.62em;font-size:clamp(64px,19vw,96px)}
+  .about-head{position:relative;left:auto;top:auto;transform:none;margin:-.62em 0 0;padding:0;text-align:center;font-size:clamp(64px,19vw,96px)}
+  .about-head .about-tabs{justify-content:center}
   .about-title{font-size:1em}
   .about-head .about-tabs{margin-top:18px;font-size:17px}
-  .about-body,html[lang="ru"] .about-body{margin:0;width:auto;padding:12px 0 0}
+  .about-body{margin:0;width:auto;padding:12px 0 0}
   .is-about .hdr{background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0))}
   .about-pane h2{margin-top:40px}
   .apply{padding:var(--hdr) 20px 80px}
@@ -334,3 +337,12 @@ details p{padding:0 0 18px}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .mp-gallery img{opacity:1;transform:none}
 }
+
+/* прикрепить фото вещей */
+.field-file{display:block;margin-top:6px;cursor:pointer}
+.field-file input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.file-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border:1px dashed rgba(255,255,255,.4);font-size:15px;color:#fff;transition:border-color .2s}
+.field-file:hover .file-btn,.field-file input:focus-visible+.file-btn{border-color:#fff}
+.file-btn svg{width:20px;height:20px}
+.file-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.file-thumbs img{width:56px;height:72px;object-fit:cover}

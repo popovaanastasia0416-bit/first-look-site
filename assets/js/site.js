@@ -194,6 +194,16 @@
       try { sessionStorage.setItem("fl-name", n.value.trim()); } catch (err) {}
       location.href = form.getAttribute("action");
     });
+    // фото вещей: показываем количество и миниатюры выбранных файлов
+    $$("[data-files]", form).forEach(function (inp) {
+      var lab = $("[data-files-label]", form), box = $("[data-file-thumbs]", form), base = lab.textContent;
+      inp.addEventListener("change", function () {
+        var fs = Array.prototype.slice.call(inp.files || []);
+        lab.textContent = fs.length ? inp.getAttribute("data-files-n") + ": " + fs.length : base;
+        box.innerHTML = "";
+        fs.slice(0, 12).forEach(function (f) { if (!/^image\//.test(f.type)) return; var im = new Image(); im.src = URL.createObjectURL(f); box.appendChild(im); });
+      });
+    });
     // «коротко о задаче» — одна строка, растёт по мере ввода
     $$("textarea", form).forEach(function (t) {
       var fit = function () { t.style.height = "auto"; t.style.height = t.scrollHeight + 1 + "px"; };
