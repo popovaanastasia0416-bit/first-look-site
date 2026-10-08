@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "45"  # поднимать при правке css/js
+VERSION = "46"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -381,7 +381,7 @@ def p_about(lang):
   </div>
   <div class="about-body">
     <section class="about-pane on" id="agency" data-pane="agency">{agency}</section>
-    <section class="about-pane" id="process" data-pane="process"><h2>{e(c['process_h'])}</h2><ol class="steps">{steps}</ol><h2>{e(c['prices_h'])}</h2><div class="plans">{plans}</div></section>
+    <section class="about-pane" id="process" data-pane="process"><h2>{e(c['process_h'])}</h2><ol class="steps">{steps}</ol><h2>{e(c['prices_h'])}</h2><p>{e(c['prices_p'])}</p><p class="about-cta"><a href="{href(lang, cur, 'apply')}#form">{e(c['prices_cta'])}</a></p></section>
     <section class="about-pane" id="faq" data-pane="faq">{faq}</section>
   </div>
 </main>
@@ -478,11 +478,10 @@ def main():
     for lang in ("ru", "en"):
         c = C[lang]
         pages = [("", p_home(lang)), ("women", p_board(lang, "women")), ("men", p_board(lang, "men")),
-                 ("services", p_services(lang)), ("about", p_about(lang)),
+                 ("about", p_about(lang)),
                  ("apply", p_apply(lang)), ("contact", p_contact(lang)), ("favourites", p_fav(lang)),
                  ("thanks", p_simple(lang, "thanks", c["thanks_h"], c["thanks_p"]))]
         pages += [("model/" + MODELS[i][0], p_model(lang, i)) for i in range(len(MODELS))]
-        pages += [("services/" + k, p_service(lang, k)) for k in SERVICE_ORDER]
         pages += [("docs/" + k, p_doc(lang, k)) for k in DOC_ORDER]
         if lang == "ru":
             pages.append(("404", p_simple(lang, "404", c["nf_h"], c["nf_p"])))

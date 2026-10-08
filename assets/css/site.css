@@ -188,6 +188,8 @@ html[lang="ru"] .about-body{padding-top:calc(37vh + 200px)}
 .about-tabs a.on{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
 .about-pane{display:none;animation:fade .5s var(--ease)}
 .about-pane.on{display:block}
+.about-cta{margin-top:22px}
+.about-cta a{display:inline-block;padding:14px 26px;background:#fff;color:#000;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .about-pane h2{font-size:20px;font-weight:600;line-height:1.3;text-transform:lowercase;margin:64px 0 18px}
 .about-pane h2:first-child{margin-top:0}

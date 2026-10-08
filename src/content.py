@@ -56,7 +56,7 @@ EYES = {
 C = {
     "ru": {
         "brand": "first look",
-        "nav": [("women", "женщины"), ("men", "мужчины"), ("services", "услуги"),
+        "nav": [("women", "женщины"), ("men", "мужчины"),
                 ("about", "агентство"), ("apply", "заявка"), ("contact", "контакты")],
         "home": "главная",
         "board": {"women": "женщины", "men": "мужчины"},
@@ -69,7 +69,7 @@ C = {
         "st": {"height": "рост", "age": "возраст", "look": "внешность", "hair": "волосы", "eyes": "глаза", "license": "аренда"},
         "years": "лет", "cm": "см",
         "rent": "арендовать модель", "shoot": "снять в ии-фотосессии",
-        "lic_v": "от 25 000 ₽ / мес",
+        "lic_v": "по запросу",
         "services_h": "услуги", "services_from": "от",
         "video_h": "видео", "video_items": [
             ("first-look-film", "одно лицо. без ограничений", "фильм агентства · 21 с"),
@@ -85,7 +85,7 @@ C = {
             ("мода, бьюти и маркетплейсы", "Мы снимаем каталоги, кампании и контент для соцсетей. Каждая модель появляется только в кадре — и только в том, который нужен вашему бренду."),
         ],
         "process_h": "от вещи до кампании за 48 часов",
-        "prices_h": "цены",
+        "prices_h": "стоимость", "prices_p": "Цену рассчитывает менеджер после заявки: она зависит от количества моделей, кадров и срока использования.", "prices_cta": "оставить заявку",
         "apply_h": "заявка",
         "apply_sub": "как прислать вещи",
         "apply_list": [
@@ -109,14 +109,14 @@ C = {
         "tg": "@firstlook_agency",
         "legal": "© 2026 FIRST LOOK. ВСЕ ПРАВА ЗАЩИЩЕНЫ.",
         "ai_note": "ВСЕ МОДЕЛИ СОЗДАНЫ ИСКУССТВЕННЫМ ИНТЕЛЛЕКТОМ",
-        "thanks_h": "заявка отправлена", "thanks_p": "Спасибо! Ответим в течение часа в рабочее время и пришлём подборку моделей под ваш бриф.",
+        "thanks_h": "заявка отправлена", "thanks_p": "Спасибо! Ответим в течение часа в рабочее время: пришлём подборку моделей под ваш бриф и расчёт стоимости.",
         "nf_h": "страница не найдена", "nf_p": "Похоже, ссылка устарела.",
         "to_home": "на главную", "to_women": "женщины", "to_men": "мужчины",
         "skip": "К содержимому",
     },
     "en": {
         "brand": "first look",
-        "nav": [("women", "women"), ("men", "men"), ("services", "services"),
+        "nav": [("women", "women"), ("men", "men"),
                 ("about", "about"), ("apply", "book"), ("contact", "contact")],
         "home": "home",
         "board": {"women": "women", "men": "men"},
@@ -129,7 +129,7 @@ C = {
         "st": {"height": "height", "age": "age", "look": "look", "hair": "hair", "eyes": "eyes", "license": "license"},
         "years": "", "cm": "cm",
         "rent": "license this model", "shoot": "use in an ai photoshoot",
-        "lic_v": "from $290 / mo",
+        "lic_v": "on request",
         "services_h": "services", "services_from": "from",
         "video_h": "video", "video_items": [
             ("first-look-film", "one face. no limits", "agency film · 21 s"),
@@ -145,7 +145,7 @@ C = {
             ("fashion, beauty & e-commerce", "We shoot catalogs, campaigns and social content. Every model exists only in the frame — and only in the frame your brand needs."),
         ],
         "process_h": "from garment to campaign in 48 hours",
-        "prices_h": "pricing",
+        "prices_h": "pricing", "prices_p": "A manager quotes the price after your request: it depends on the number of models, shots and the license term.", "prices_cta": "send a request",
         "apply_h": "book",
         "apply_sub": "how to send your garments",
         "apply_list": [
@@ -169,7 +169,7 @@ C = {
         "tg": "@firstlook_agency",
         "legal": "© 2026 FIRST LOOK. ALL RIGHTS RESERVED.",
         "ai_note": "ALL MODELS ARE AI-GENERATED",
-        "thanks_h": "request sent", "thanks_p": "Thank you! We'll reply within an hour during business hours and send a selection of models for your brief.",
+        "thanks_h": "request sent", "thanks_p": "Thank you! We'll reply within an hour during business hours and send a selection of models for your brief with a price quote.",
         "nf_h": "page not found", "nf_p": "The link may be outdated.",
         "to_home": "home", "to_women": "women", "to_men": "men",
         "skip": "Skip to content",
