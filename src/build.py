@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "50"  # поднимать при правке css/js
+VERSION = "52"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -429,7 +429,7 @@ def p_contact(lang):
     c, cur = C[lang], "contact"
     cols = "".join(f'<div><p>{e(k)}</p><a href="mailto:{v}">{e(v)}</a></div>' for k, v in c["contact_cols"])
     body = f"""<main id="main" class="contact">
-  <section class="contact-hero"><iframe src="https://yandex.ru/map-widget/v1/?ll=37.6110%2C55.7610&amp;z=15&amp;pt=37.6110%2C55.7610%2Cpm2blm&amp;lang={'ru_RU' if lang == 'ru' else 'en_US'}" title="{e(c['contact_h'])}" loading="lazy" allowfullscreen></iframe><h1 class="big-title">{e(c['contact_h'])}</h1></section>
+  <section class="contact-hero"><a class="contact-map" href="https://yandex.ru/maps/?ll=37.6110%2C55.7610&amp;z=16&amp;pt=37.6110%2C55.7610" target="_blank" rel="noopener" aria-label="{e(c['contact_h'])}"><img src="{asset(lang, cur, 'img/contact-map.jpg')}" alt="" width="1920" height="560"></a><span class="map-credit">© Яндекс Карты</span><h1 class="big-title">{e(c['contact_h'])}</h1></section>
   <p class="contact-addr">{"<br>".join(e(a) for a in c['address'])}<br><a href="https://t.me/{c['tg'][1:]}">telegram {e(c['tg'])}</a></p>
   <div class="contact-cols">{cols}</div>
 </main>

@@ -251,7 +251,9 @@ details p{padding:0 0 18px}
 .is-contact .hdr{background:#000}
 .contact-hero{position:relative;height:43vh;min-height:300px;overflow:hidden;background:#1b1b1b}
 /* карта как у Models 1: тёмная, на всю ширину, слово «контакты» снизу поверх неё */
-.contact-hero iframe{display:block;width:100%;height:calc(100% + 60px);margin-top:-60px;border:0;filter:invert(.92) hue-rotate(180deg) grayscale(1) contrast(.95) brightness(.9)}
+.contact-map{display:block;height:100%}
+.contact-map img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.map-credit{position:absolute;right:10px;bottom:6px;font-size:10px;color:rgba(255,255,255,.45)}
 .contact-hero .big-title{pointer-events:none}
 .contact-hero .big-title{position:absolute;left:50%;bottom:-0.12em;transform:translateX(-50%);white-space:nowrap}
 .contact-addr{margin:40px auto 0;text-align:center;font-size:16px;line-height:1.6}
