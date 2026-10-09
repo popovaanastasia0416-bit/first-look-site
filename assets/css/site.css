@@ -212,13 +212,16 @@ details p{padding:0 0 18px}
 
 /* ── заявка ────────────────────────── */
 .apply{padding:var(--hdr) 64px 100px 40px}
-.apply-top{display:grid;grid-template-columns:minmax(300px,520px) 1fr;gap:48px;align-items:start;padding-top:10px}
-.apply-copy h2{font-size:17px;font-weight:600;margin:34px 0 14px}
+/* заголовок слева, инструкция справа; ниже — три шага обычными прямоугольными кадрами */
+.apply-top{display:grid;grid-template-columns:1fr minmax(340px,620px);gap:48px;align-items:start;padding-top:10px;max-width:1240px}
+.apply-copy h2{font-size:17px;font-weight:600;margin:14px 0 14px}
 .apply-copy li{position:relative;padding:5px 0 5px 18px;font-size:15px;line-height:1.55;color:#d6d6d6}
 .apply-copy li::before{content:"";position:absolute;left:0;top:14px;width:5px;height:5px;border-radius:50%;background:#fff}
-.apply-ex{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.apply-ex img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.apply-ex figcaption{margin-top:8px;font-size:14px;color:var(--muted)}
+.apply-ex{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin-top:48px}
+.apply-ex figure{margin:0}
+.apply-ex img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 30%}
+.apply-ex figcaption{margin-top:12px;font-size:15px;color:#d6d6d6}
+.apply-ex figcaption b{display:block;margin-bottom:2px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;width:max-content;margin:70px auto 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .scroll-hint svg{width:18px;height:18px;animation:bob 2s var(--ease) infinite}
 @keyframes bob{50%{transform:translateY(6px)}}
@@ -325,7 +328,9 @@ details p{padding:0 0 18px}
   .is-about .hdr{background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0))}
   .about-pane h2{margin-top:40px}
   .apply{padding:var(--hdr) 20px 80px}
-  .apply-top{grid-template-columns:1fr}
+  .apply-top{grid-template-columns:1fr;gap:8px}
+  .apply-ex{grid-template-columns:1fr;gap:24px;margin-top:32px}
+  .apply-ex img{aspect-ratio:4/3}
   .contact-cols{grid-template-columns:1fr 1fr;padding:0 20px}
   .contact-hero{height:36vh}
   .simple{padding:var(--hdr) 20px 60px}

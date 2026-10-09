@@ -6,6 +6,7 @@
   assets/img/video/*.jpg — постеры
 """
 import os
+import sys
 import subprocess
 from pathlib import Path
 
@@ -17,6 +18,8 @@ V = ROOT / 'assets' / 'video'
 P = ROOT / 'assets' / 'img' / 'video'
 ENC = ['-an', '-c:v', 'libx264', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart']
 GRADE = 'eq=contrast=1.04:saturation=0.9:gamma=0.98,colorbalance=bs=0.03:bm=0.01'
+# у ролика Saskia в последние 0,5 с фон замирает, хотя она ещё идёт — эти полсекунды срезаем
+TAIL_CUT = {1: 0.5}
 CLIPS = [('clip-casting', DL / '1-hailuo-trim.mp4'), ('clip-travel', SRC / '2.mp4'), ('clip-shoot', SRC / '3.mp4')]
 
 
@@ -35,20 +38,20 @@ def poster(src, dst, t=1.0, w=1280):
 def main():
     V.mkdir(parents=True, exist_ok=True)
     P.mkdir(parents=True, exist_ok=True)
-    # отдельные ролики для раздела «видео»
-    for name, src in CLIPS:
+    # отдельные ролики для раздела «видео» (раздел убран; `home` — собрать только фон главной)
+    for name, src in ([] if 'home' in sys.argv else CLIPS):
         ff('-i', src, '-vf', f'scale=1280:-2,fps=24,{GRADE}', *ENC, '-crf', 25, V / f'{name}.mp4')
         poster(src, P / f'{name}.jpg', t=min(3.0, dur(src) - 0.5))
-    for lang in ('ru', 'en'):
+    for lang in (() if 'home' in sys.argv else ('ru', 'en')):
         src = DL / f'first-look-film-{lang}.mp4'
         ff('-i', src, '-vf', 'scale=1280:-2', *ENC, '-crf', 24, V / f'first-look-film-{lang}.mp4')
         poster(src, P / f'first-look-film-{lang}.jpg', t=19.6)
     # фон главной: ролики подряд, переходы через растворение, без подписей
-    d = [dur(s) for _, s in CLIPS]
+    d = [dur(s) - TAIL_CUT.get(k, 0) for k, (_, s) in enumerate(CLIPS)]
     xf = 0.8
     chain = []
     for k in range(3):
-        chain.append(f'[{k}:v]scale=1920:1080:flags=lanczos,fps=24,setsar=1,format=yuv420p,{GRADE},setpts=PTS-STARTPTS[v{k}]')
+        chain.append(f'[{k}:v]trim=duration={d[k]:.3f},scale=1920:1080:flags=lanczos,fps=24,setsar=1,format=yuv420p,{GRADE},setpts=PTS-STARTPTS[v{k}]')
     o1 = d[0] - xf
     o2 = o1 + d[1] - xf
     chain.append(f'[v0][v1]xfade=transition=fade:duration={xf}:offset={o1:.3f}[a]')

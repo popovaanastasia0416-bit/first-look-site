@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "52"  # поднимать при правке css/js
+VERSION = "54"  # поднимать при правке css/js
 e = html.escape
 
 
@@ -411,13 +411,14 @@ def form(lang, cur):
 def p_apply(lang):
     c, cur = C[lang], "apply"
     lst = "".join(f"<li>{e(x)}</li>" for x in c["apply_list"])
-    ex = "".join(f'<figure><img src="{asset(lang, cur, f"img/apply/{i}.jpg")}" alt="" width="600" height="800" loading="lazy"><figcaption>{e(cap)}</figcaption></figure>'
+    ex = "".join(f'<figure><img src="{asset(lang, cur, f"img/apply/{i}.jpg")}" alt="" width="600" height="800" loading="lazy"><figcaption><b>{e(c["step"])} {i}</b>{e(cap)}</figcaption></figure>'
                  for i, cap in enumerate(c["apply_examples"], 1))
     body = f"""<main id="main" class="apply">
   <section class="apply-top">
-    <div class="apply-copy"><h1 class="big-title">{e(c['apply_h'])}</h1><h2>{e(c['apply_sub'])}</h2><ul>{lst}</ul></div>
-    <div class="apply-ex">{ex}</div>
+    <h1 class="big-title">{e(c['apply_h'])}</h1>
+    <div class="apply-copy"><h2>{e(c['apply_sub'])}</h2><ul>{lst}</ul></div>
   </section>
+  <div class="apply-ex">{ex}</div>
   <a class="scroll-hint" href="#form">{e(c['apply_scroll'])}{I['down']}</a>
   <section class="apply-form" id="form"><h2>{e(c['form_h'])}</h2>{form(lang, cur)}</section>
 </main>
