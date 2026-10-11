@@ -11,7 +11,7 @@ from content import C, EYES, HAIR
 from data import DOC_ORDER, DOCS, MODELS, SERVICE_ORDER, SERVICES, T
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "54"  # поднимать при правке css/js
+VERSION = "55"  # поднимать при правке css/js
 e = html.escape
 
 
